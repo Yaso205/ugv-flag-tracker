@@ -13,6 +13,8 @@ void MotorControl::begin() {
     pinMode(Config::LEFT_IN2_PIN, OUTPUT);
     pinMode(Config::RIGHT_IN1_PIN, OUTPUT);
     pinMode(Config::RIGHT_IN2_PIN, OUTPUT);
+    pinMode(Config::LEFT_PWM_PIN, OUTPUT);
+    pinMode(Config::RIGHT_PWM_PIN, OUTPUT);
 
     attachPwm(Config::LEFT_PWM_PIN, 0);
     attachPwm(Config::RIGHT_PWM_PIN, 1);
@@ -52,11 +54,11 @@ void MotorControl::setOneMotor(int speed, uint8_t pwmPin, uint8_t in1Pin,
     }
 
     if (speed > 0) {
-        digitalWrite(in1Pin, HIGH);
-        digitalWrite(in2Pin, LOW);
-    } else {
         digitalWrite(in1Pin, LOW);
         digitalWrite(in2Pin, HIGH);
+    } else {
+        digitalWrite(in1Pin, HIGH);
+        digitalWrite(in2Pin, LOW);
     }
 
     writePwm(pwmPin, channel, static_cast<uint8_t>(abs(speed)));
