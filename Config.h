@@ -6,6 +6,7 @@
 namespace Config {
 
 // Motor driver: each motor needs PWM + two direction inputs.
+
 constexpr uint8_t LEFT_PWM_PIN  = 27;//blue
 constexpr uint8_t LEFT_IN1_PIN  = 19;
 constexpr uint8_t LEFT_IN2_PIN  = 21;
@@ -45,7 +46,7 @@ constexpr uint32_t PID_MAX_DT_MS = 500;      // gap longer than this resets the 
 
 // Motion and mission tuning.
 constexpr uint8_t MOTOR_PWM_RESOLUTION_BITS = 8;
-constexpr uint32_t MOTOR_PWM_FREQUENCY_HZ = 20000;
+constexpr uint32_t MOTOR_PWM_FREQUENCY_HZ = 30000;
 constexpr int MAX_APPROACH_SPEED = 155;
 constexpr int SCAN_SPEED = 70;
 constexpr int MAX_TURN_SPEED = 115;
