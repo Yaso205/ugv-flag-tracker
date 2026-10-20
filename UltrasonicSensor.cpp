@@ -1,6 +1,13 @@
 #include "UltrasonicSensor.h"
 #include "Config.h"
 
+#define SOUND_SPEED 0.034
+#define CM_TO_INCH 0.393701
+
+long duration;
+float distanceCm;
+float distanceInch;
+
 void UltrasonicSensor::begin() {
     pinMode(Config::ULTRASONIC_TRIG_PIN, OUTPUT);
     pinMode(Config::ULTRASONIC_ECHO_PIN, INPUT);
@@ -9,10 +16,12 @@ void UltrasonicSensor::begin() {
 
 bool UltrasonicSensor::readDistanceCM(float &distanceCm) {
     digitalWrite(Config::ULTRASONIC_TRIG_PIN, LOW);
-    delayMicroseconds(3);
+    delayMicroseconds(2);
     digitalWrite(Config::ULTRASONIC_TRIG_PIN, HIGH);
     delayMicroseconds(10);
     digitalWrite(Config::ULTRASONIC_TRIG_PIN, LOW);
+
+    duration = pulseIn(Config::ULTRASONIC_ECHO_PIN, HIGH);
 
     const unsigned long echoTimeUs = pulseIn(
         Config::ULTRASONIC_ECHO_PIN, HIGH, Config::ULTRASONIC_TIMEOUT_US);
